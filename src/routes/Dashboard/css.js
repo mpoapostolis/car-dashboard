@@ -256,7 +256,7 @@ export const logBox = css`
   flex-direction: column-reverse;
   word-break: break;
   p {
-    color: #ffffffAf;
+    color: #ffffffaf;
     margin-left: 20px;
   }
   color: white;
@@ -268,11 +268,16 @@ export const carName = css`
   text-align: left;
   position: relative;
   top: 30px;
-  left: 30px;
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
   font-weight: 600;
   text-transform: capitalize;
+  .overLimit{
+
+  }
   &.connected {
     color: #32cd32;
   }
 `;
+

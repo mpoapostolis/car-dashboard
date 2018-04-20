@@ -50,6 +50,7 @@ class DashBoard extends Component {
       {
         name: 'test',
         avgCarSpeed: 0,
+        overLimit: true,
         speed: 0,
         history: [...Array(70).keys()].map((e, i) => ({
           value: e,
@@ -185,7 +186,14 @@ class DashBoard extends Component {
           </div>
           {cars.map((car, key) => (
             <div key={key} className={styles[`carBox${key + 1}`]}>
-              <label className={carName}>{car.name}</label>
+              <label className={carName}>
+                {car.name}
+                {car.overLimit ? (
+                  <img src="/images/warning.svg" alt="" />
+                ) : (
+                  <div />
+                )}
+              </label>
               <div className={speedMeterCont}>
                 <ReactSpeedometer
                   startColor={'#29D3CA'}

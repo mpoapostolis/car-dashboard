@@ -4,9 +4,19 @@ export const container = css`
   display: flex;
   user-select: none;
   height: 100%;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  margin-right: 20px;
+  margin: 0 20px 0 20px;
+  color: white;
+`;
+
+export const infoButton = css`
+  display: flex;
+  width: 90px;
+  text-transform: capitalize;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
 `;
 
 export const avatar = css`
