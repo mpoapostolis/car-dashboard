@@ -95,15 +95,14 @@ class DashBoard extends Component {
 
   componentDidMount() {
     socket.on('update-browser', e => {
-      this.setState({...e});
+      console.log("ss")
+      this.setState(s => ({...e}));
     });
     socket.on('log', e => {
-      console.log(e);
-
-      this.setState({logs: [e, ...this.state.logs].splice(-40)});
+      const tmpMsgs = this.state.logs.slice(0,40)
+      this.setState(s => ({...s, logs: [e,...tmpMsgs]}));
     });
 
-    console.log(this.state.cars);
   }
 
   render() {
@@ -205,8 +204,8 @@ class DashBoard extends Component {
                   ringWidth={10}
                   textColor="#676C7F"
                   maxValue={16}
-                  currentValueText={`${car.speed ? car.speed : 0} km/h`}
-                  value={car.speed ? car.speed : 0}
+                  currentValueText={`${car.speed ? +car.speed : 0} km/h`}
+                  value={car.speed ? +car.speed : 0}
                 />
               </div>
               <div className={chartCont}>

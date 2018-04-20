@@ -48,7 +48,8 @@ io.on('connection', function(client) {
         const tmpHistory = cars[index].history ? cars[index].history : [];
         data.speed = data.speed ? data.speed / 100 : 0;
         const dato = {value: data.speed};
-        data.history = [...tmpHistory, dato].slice(-70);
+        data.history = tmpHistory.slice(-70);
+        data.history.push(dato)
         data.history.forEach(e => {
           avgCarSpeed += e.value;
         });
@@ -79,10 +80,9 @@ io.on('connection', function(client) {
      riskyDrivers += [...cars.slice(index + 1).filter(car2 => (Math.abs(car.lane - car2.lane) <=1 && car.pieceId === car2.pieceId))].length > 0 ? 1 :0
       }
     )
-    movingCars = [...cars.filter(car => car.speed > 0)].length;
+    movingCars = cars.filter(car => car.speed > 0).length;
     averageSpeed /= cars.length;
-    carsOverLimit = [...cars.filter(car => car.overLimit)].length;
-    maxSpeed = isFinite(maxSpeed) ? maxSpeed : 0;
+    carsOverLimit = cars.filter(car => car.overLimit).length;
     
     const infos = {
       movingCars,
@@ -92,6 +92,7 @@ io.on('connection', function(client) {
       lanes,
       riskyDrivers
     };
+    console.log("1111111");
     
     client.broadcast.emit('update-browser', {cars, infos});
   });
@@ -107,10 +108,10 @@ setInterval(()=>{
     clients[index].emit("change-lane",laneOffsets[newlane-1])
     io.emit("log",`Car ${cars[index].name}: new lane ${5-newlane}`)
   }
-  const newSpeed = Math.floor(Math.random() * 600) +250
-  clients[index].emit("update-speed",newSpeed)
+  const newSpeed = (Math.random() * 500) + 350
+  clients[index].emit("update-speed", newSpeed)
   io.emit("log",`Car ${cars[index].name}: new speed ${(newSpeed/100).toFixed(2)} km/h`)
-},3000)
+},4000)
 
 const PORT = 8080;
 
