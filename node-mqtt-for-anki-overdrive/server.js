@@ -108,8 +108,8 @@ setInterval(()=>{
     clients[index].emit("change-lane",laneOffsets[newlane-1])
     io.emit("log",`Car ${cars[index].name}: new lane ${5-newlane}`)
   }
-  const newSpeed = (Math.random() * 500) + 350
-  clients[index].emit("update-speed", newSpeed)
+  const newSpeed = Math.floor(Math.random() * 500) +450
+  clients[index].emit("update-speed",newSpeed)
   io.emit("log",`Car ${cars[index].name}: new speed ${(newSpeed/100).toFixed(2)} km/h`)
 },4000)
 
