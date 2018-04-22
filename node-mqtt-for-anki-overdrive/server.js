@@ -108,7 +108,7 @@ setInterval(()=>{
     io.emit("log",`Car ${cars[index].name}: new lane ${5-newlane}`)
   }
   const minSpeed = cars[index].type === "truck" ? 950 : 550 
-  const randomSpeed = cars[index].type === "truck" ? 0  : (Math.random() * 600) 
+  const randomSpeed = cars[index].type === "truck" ? (Math.random() * 150)  : (Math.random() * 600) 
   const newSpeed = randomSpeed + minSpeed
   clients[index].emit("update-speed", newSpeed)
   io.emit("log",`Car ${cars[index].name}: new speed ${(newSpeed/100).toFixed(2)} km/h`)

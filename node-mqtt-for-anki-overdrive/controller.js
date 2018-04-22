@@ -153,7 +153,7 @@ function init(startlane) {
         if (!err) {
           console.log('Initialization was successful');
           console.log('Enter a command: help, s (speed), c (change lane), e (end/stop), l (lights), lp (lights pattern), o (offset), sdk, ping, bat, ver, q (quit)');
-          invokeCommand("s")          
+          invokeCommand("s 500")          
         }
         else {
           console.log('Initialization error');
