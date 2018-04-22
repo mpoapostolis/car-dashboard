@@ -35,7 +35,7 @@ module.exports = function() {
           console.error('Error parsing the configuration file - see config-sample.properties for an example');
           process.exit(0);
         }
-        socket.emit('connect-car',{name:cfg.name, lane: cfg.startlane,  id:cfg.carid})
+        socket.emit('connect-car',{name:cfg.name, lane: cfg.startlane,  id:cfg.carid, type: cfg.type})
           callback(cfg.carid, cfg.startlane, null,cfg.name);
       });	
 	  }
