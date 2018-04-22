@@ -53,11 +53,7 @@ io.on('connection', function(client) {
         data.history.forEach(e => {
           avgCarSpeed += e.value;
         });
-        if (car.type === "truck") {
-          data.overLimit = data.speed > 6.5;
-        } else {
-          data.overLimit = data.speed > 5.5;
-        }
+        data.overLimit = data.speed > 5.5;
         switch (true) {
           case data.offset < -30:
             data.lane = 4;
@@ -96,7 +92,6 @@ io.on('connection', function(client) {
       lanes,
       riskyDrivers
     };
-    console.log("1111111");
     
     client.broadcast.emit('update-browser', {cars, infos});
   });
@@ -112,7 +107,8 @@ setInterval(()=>{
     clients[index].emit("change-lane",laneOffsets[newlane-1])
     io.emit("log",`Car ${cars[index].name}: new lane ${5-newlane}`)
   }
-  const newSpeed = (Math.random() * 500) + 350
+  const minSpeed = cars[index].type === "truck" ? 750 : 350 
+  const newSpeed = (Math.random() * 500) + minSpeed
   clients[index].emit("update-speed", newSpeed)
   io.emit("log",`Car ${cars[index].name}: new speed ${(newSpeed/100).toFixed(2)} km/h`)
 },4000)
