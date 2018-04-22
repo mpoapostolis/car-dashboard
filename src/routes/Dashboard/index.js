@@ -170,7 +170,7 @@ class DashBoard extends Component {
 
     return (
       <div className={container}>
-        <div className={labelClass}>DASHBOARD</div>
+        <div className={labelClass}>TRAFFIC DASHBOARD</div>
         <div className={`${mainClass} ${isSix}`}>
           <div className={infoHead}>
             {infosArr.map((obj, key) => (

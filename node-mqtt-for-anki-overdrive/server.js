@@ -101,7 +101,9 @@ const laneOffsets = [-68, -23, 23, 68]
 setInterval(()=>{
   if (cars.length < 1) return
   let index = Math.floor(Math.random() * cars.length)
-  const newlane = cars[index].lane + (Math.random() > 0.5 ? 1 : -1)
+  const randomDirection = Math.random() > 0.5 ? 1 : -1
+  const direction = cars[index].lane === 4 ? -1 : cars[index].lane === 1 ? 1 : randomDirection 
+  const newlane = cars[index].lane + direction
   const canTurn = newlane > 0 && newlane < 5 && [...cars.filter( car => cars[index].pieceId === car.pieceId && newlane === car.lane)].length < 1
   if(canTurn){
     clients[index].emit("change-lane",laneOffsets[newlane-1])
