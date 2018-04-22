@@ -9,11 +9,11 @@ const cars = [];
 const clients = []
 
 io.on('connection', function(client) {
-  client.on('connect-car', function({name, lane}) {
+  client.on('connect-car', function({name, lane, type}) {
     const found = cars.find(e => e.name === name)
     if(!found) {
       clients.push(client)
-      cars.push({name, lane})
+      cars.push({name, lane, type})
     };
   });
  
@@ -53,7 +53,11 @@ io.on('connection', function(client) {
         data.history.forEach(e => {
           avgCarSpeed += e.value;
         });
-        data.overLimit = data.speed > 5.5;
+        if (car.type === "truck") {
+          data.overLimit = data.speed > 6.5;
+        } else {
+          data.overLimit = data.speed > 5.5;
+        }
         switch (true) {
           case data.offset < -30:
             data.lane = 4;
