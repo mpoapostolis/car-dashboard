@@ -92,7 +92,7 @@ io.on('connection', function(client) {
       lanes,
       riskyDrivers
     };
-    console.log("1111111");
+    //console.log("1111111");
     
     client.broadcast.emit('update-browser', {cars, infos});
   });
@@ -108,7 +108,7 @@ setInterval(()=>{
     clients[index].emit("change-lane",laneOffsets[newlane-1])
     io.emit("log",`Car ${cars[index].name}: new lane ${5-newlane}`)
   }
-  const newSpeed = Math.floor(Math.random() * 500) +450
+  const newSpeed = Math.floor(Math.random() * 500) + 650
   clients[index].emit("update-speed",newSpeed)
   io.emit("log",`Car ${cars[index].name}: new speed ${(newSpeed/100).toFixed(2)} km/h`)
 },4000)
